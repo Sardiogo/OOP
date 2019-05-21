@@ -2,9 +2,12 @@ import java.time.*;
 
 class Employee
 {
+    private static int nextId = 1;
+
     private String name;
     private double salary;
     private LocalDate hireDay;
+    private int id;
     /*
      * three instance fields that will hold the data manipulated
      * inside an instance of the Employee class.
@@ -16,6 +19,7 @@ class Employee
         name = n;
         salary = s;
         hireDay = LocalDate.of(year, month, day);
+        id = 0;
     }
 
     public String getName()
@@ -48,10 +52,29 @@ class Employee
         // java.lang is the default API no 'import' needed
     }
 
+    public int getId()
+    {
+        return id;
+    }
+
+    public void setId()
+    {
+        id = nextId; // set id to next available id
+        nextId++;
+    }
+
+    public static int getNextId()
+    {
+        return nextId; // returns static field
+    }
+
     public static void main(String[] args) // unit test
     {
         Employee e = new Employee("Romeo", 50000, 2003, 3, 31);
         e.raiseSalary(10);
         System.out.println(e.getName() + " " + e.getSalary());
+        
+        Employee e1 = new Employee("Harry", 50000, 2003, 3, 31);
+        System.out.println(e1.getName() + " " + e1.getSalary());
     }
 }
